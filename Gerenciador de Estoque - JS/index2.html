@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Gerenciador de Estoque</title>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <h3>Adicionar Produto</h3>
+    <input type="text" id="productName" placeholder="Nome do Produto">
+    <input type="number" id="productQuantity" placeholder="Quantidade">
+    <button id="addProduct">Adicionar</button>
+    <hr />
+    
+    <h1>Gerenciador de Estoque</h1>
+    <table id="inventory">
+      <tr>
+        <th>Nome do Produto</th>
+        <th>Quantidade</th>
+        <th>Ação</th>
+      </tr>
+    </table>
+    <br>
+
+    <script>
+      const addProductButton = document.querySelector("#addProduct");
+      addProductButton.addEventListener("click", function() {
+        const productName = document.querySelector("#productName").value;
+        const productQuantity = document.querySelector("#productQuantity").value;
+        const inventory = document.querySelector("#inventory");
+
+        const newRow = inventory.insertRow();
+        newRow.innerHTML = `
+          <td>${productName}</td>
+          <td>${productQuantity}</td>
+          <td><button class="remove">Remover</button></td>
+        `;
+
+        const removeButtons = document.querySelectorAll(".remove");
+        removeButtons.forEach(function(removeButton) {
+          removeButton.addEventListener("click", function() {
+            const row = this.parentElement.parentElement;
+            row.remove();
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
